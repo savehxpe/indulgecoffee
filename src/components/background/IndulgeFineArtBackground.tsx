@@ -137,8 +137,8 @@ const HeroBean: React.FC = () => {
       <CoffeeBean3D
         scale={2.0}
         color="#4A2C17"
-        roughness={0.22}
-        metalness={0.12}
+        roughness={0.18}
+        metalness={0.15}
         position={[0, 0, 0]}
         rotation={[0, 0, 0]}
         rotateRate={0}
@@ -184,14 +184,14 @@ const SteamLayer: React.FC<{ speedMul: number; opacity: number; count: number; d
 
   return (
     <instancedMesh ref={meshRef} args={[geo, undefined, count]} position={[0, 0.25, 0]}>
-      <meshBasicMaterial color="#fbf6f0" transparent opacity={opacity} depthWrite={false} />
+      <meshStandardMaterial color="#fbf6f0" transparent opacity={opacity} roughness={0.55} metalness={0.05} depthWrite={false} />
     </instancedMesh>
   );
 };
 
 // ── Granules (InstancedMesh) ──
 const Granules: React.FC = () => {
-  const count = 200;
+  const count = 300;
   const meshRef = useRef<THREE.InstancedMesh>(null);
   const timeRef = useRef(0);
   const geo = useMemo(() => new THREE.SphereGeometry(1, 5, 5), []);
@@ -247,11 +247,11 @@ export const IndulgeFineArtBackground: React.FC = () => {
         dpr={[1, 1.5]}
       >
         <color attach="background" args={['#000000']} />
-        <fog attach="fog" args={['#000000', 3, 12]} />
+        <fog attach="fog" args={['#000000', 3.5, 14]} />
 
         {/* Static lights */}
-        <ambientLight color="#2e1503" intensity={0.2} />
-        <spotLight position={[-1.2, 2.5, -0.8]} angle={0.4} penumbra={0.9} intensity={2.5} color="#f5e6d3" decay={1} distance={8} />
+        <ambientLight color="#2e1503" intensity={0.28} />
+        <spotLight position={[-1.2, 2.5, -0.8]} angle={0.4} penumbra={0.9} intensity={3.5} color="#f5e6d3" decay={1} distance={8} />
         <pointLight position={[0, -0.1, 1.2]} color="#c44b0a" intensity={0.5} decay={2} distance={3} />
 
         <LightRig />
@@ -264,18 +264,20 @@ export const IndulgeFineArtBackground: React.FC = () => {
         <CoffeeBean3D scale={0.55} color="#3E1E0F" roughness={0.28} metalness={0.1} position={[1.2, -0.4, -2.0]} rotateRate={0.12} />
         <CoffeeBean3D scale={0.45} color="#5C3A21" roughness={0.32} metalness={0.08} position={[-0.7, 0.35, -2.8]} rotateRate={0.09} />
         <CoffeeBean3D scale={0.5} color="#4A2C17" roughness={0.25} metalness={0.1} position={[0.4, -0.55, -3.5]} rotateRate={0.14} />
+        <CoffeeBean3D scale={0.35} color="#6B3A2A" roughness={0.3} metalness={0.08} position={[-1.0, -0.3, -1.5]} rotateRate={0.1} />
+        <CoffeeBean3D scale={0.4} color="#3E1E0F" roughness={0.26} metalness={0.09} position={[0.8, 0.5, -3.0]} rotateRate={0.11} />
 
         {/* Far steam layer — slow, wide, faint */}
-        <SteamLayer speedMul={0.55} opacity={0.08} count={30} driftRange={1.6} />
+        <SteamLayer speedMul={0.55} opacity={0.14} count={45} driftRange={1.6} />
 
         {/* Close steam layer — faster, thinner, more visible */}
-        <SteamLayer speedMul={1.0} opacity={0.18} count={40} driftRange={0.5} />
+        <SteamLayer speedMul={1.0} opacity={0.25} count={60} driftRange={0.5} />
 
         <Granules />
 
         <EffectComposer>
-          <Bloom luminanceThreshold={0.3} luminanceSmoothing={0.9} intensity={0.22} />
-          <Vignette eskil={false} offset={0.25} darkness={0.45} />
+          <Bloom luminanceThreshold={0.3} luminanceSmoothing={0.9} intensity={0.28} />
+          <Vignette eskil={false} offset={0.25} darkness={0.35} />
         </EffectComposer>
       </Canvas>
     </div>
