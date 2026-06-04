@@ -255,7 +255,7 @@ export const CinematicScrollCanvas: React.FC = () => {
               Indulge Coffee
             </h2>
             <p className="text-[10px] uppercase tracking-[0.3em] text-muted-foreground">
-              {phase === 'probing' ? 'Warming the roasters…' : 'Loading Indulge Experience'}
+              {phase === 'probing' ? 'Grinding the beans…' : 'Pouring a fresh cup…'}
             </p>
 
             <div className="w-44 h-px bg-white/10 rounded-full overflow-hidden mx-auto">
