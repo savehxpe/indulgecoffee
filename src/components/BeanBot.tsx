@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { X } from 'lucide-react';
+import { GlowOrb } from './GlowOrb';
 import { tap } from '../utils/haptic';
 
 interface BeanBotProps {
@@ -66,28 +67,26 @@ export const BeanBot: React.FC<BeanBotProps> = ({ onOpenDirections }) => {
         }
       `}</style>
 
-      {idle && (
-        <div className="fixed inset-0 z-[9997] bg-black/20 pointer-events-none animate-fade-rise" />
-      )}
-
-      {idle && (
+      {idle && (<>
+        <div className="fixed inset-0 z-[9997] bg-black/50 pointer-events-none transition-opacity duration-1000" />
+        <GlowOrb className="inset-0 w-[250px] h-[250px] m-auto" />
         <div className="fixed inset-0 z-[9998] flex flex-col items-center justify-center pointer-events-none animate-fade-rise" style={{ animationDuration: '1.5s' }}>
           <BeanSVG w={44} h={52} />
           <p
-            className="text-accent/40 text-sm font-mono uppercase mt-5"
+            className="text-accent/70 text-sm font-mono uppercase mt-5"
             style={{ animation: 'brew-fade 4s ease-in-out infinite' }}
           >
             Still brewing
           </p>
-          <p className="text-accent/25 text-[10px] font-mono tracking-[0.3em] mt-2">{timeStr}</p>
+          <p className="text-accent/50 text-[10px] font-mono tracking-[0.3em] mt-2">{timeStr}</p>
           <p
-            className="text-muted-foreground/25 text-[11px] mt-5"
+            className="text-muted-foreground/50 text-[11px] mt-5"
             style={{ fontFamily: "'Instrument Serif', serif" }}
           >
             Take your time.
           </p>
         </div>
-      )}
+      </>)}
 
       {!idle && (
         <button
@@ -100,7 +99,10 @@ export const BeanBot: React.FC<BeanBotProps> = ({ onOpenDirections }) => {
       )}
 
       {!idle && open && (
-        <div className="fixed bottom-24 right-6 z-50 liquid-glass rounded-2xl p-5 w-64 animate-fade-rise shadow-xl">
+        <div
+          className="fixed bottom-24 right-6 z-50 rounded-2xl p-5 w-64 animate-fade-rise shadow-2xl"
+          style={{ background: 'rgba(10,10,10,0.92)', backdropFilter: 'blur(20px)', border: '1px solid rgba(255,255,255,0.06)' }}
+        >
           <div className="flex items-center justify-between mb-4">
             <h3 className="text-base text-white font-normal" style={{ fontFamily: "'Instrument Serif', serif" }}>Pula</h3>
             <button onClick={() => setOpen(false)} className="p-1.5 rounded-full hover:bg-white/[0.05] transition-colors cursor-pointer text-muted-foreground hover:text-white">
