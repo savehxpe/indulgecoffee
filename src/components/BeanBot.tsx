@@ -1,22 +1,43 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import { X } from 'lucide-react';
-import { gsap } from 'gsap';
 import { tap } from '../utils/haptic';
 
 interface BeanBotProps {
   onOpenDirections: () => void;
 }
 
+const BeanSVG: React.FC<{ w: number; h: number; paused?: boolean }> = ({ w, h, paused }) => (
+  <svg
+    viewBox="0 0 24 24"
+    width={w}
+    height={h}
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+    style={{
+      filter: 'drop-shadow(0 4px 12px rgba(0,0,0,0.4))',
+      animation: paused ? 'none' : 'pula-pulse 3s ease-in-out infinite',
+    }}
+  >
+    <ellipse cx="12" cy="12" rx="10" ry="13" fill="rgba(180,100,40,0.7)" />
+    <ellipse cx="12" cy="12" rx="8.5" ry="11" fill="url(#pulaGrad)" />
+    <defs>
+      <radialGradient id="pulaGrad" cx="0.35" cy="0.3" r="0.8">
+        <stop offset="0%" stopColor="rgba(230,150,60,0.4)" />
+        <stop offset="100%" stopColor="rgba(100,50,20,0.35)" />
+      </radialGradient>
+    </defs>
+    <path d="M9 5.5 Q12 12 9 18.5" stroke="rgba(60,25,5,0.5)" strokeWidth="0.8" strokeLinecap="round" fill="none" />
+  </svg>
+);
+
 export const BeanBot: React.FC<BeanBotProps> = ({ onOpenDirections }) => {
   const [open, setOpen] = useState(false);
   const [idle, setIdle] = useState(false);
   const [elapsed, setElapsed] = useState(0);
-  const beanRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
     const check = setInterval(() => {
-      const isIdle = document.body.classList.contains('idle');
-      setIdle(isIdle);
+      setIdle(document.body.classList.contains('idle'));
     }, 500);
     return () => clearInterval(check);
   }, []);
@@ -24,35 +45,8 @@ export const BeanBot: React.FC<BeanBotProps> = ({ onOpenDirections }) => {
   useEffect(() => {
     if (!idle) { setElapsed(0); return; }
     setElapsed(0);
-    const tick = setInterval(() => setElapsed(t => t + 1), 1000);
+    const tick = setInterval(() => setElapsed((t) => t + 1), 1000);
     return () => clearInterval(tick);
-  }, [idle]);
-
-  useEffect(() => {
-    const bean = beanRef.current;
-    if (!bean) return;
-
-    if (idle) {
-      gsap.to(bean, {
-        bottom: '50%',
-        right: '50%',
-        x: '50%',
-        y: '50%',
-        scale: 1.6,
-        duration: 0.8,
-        ease: 'power3.out',
-      });
-    } else {
-      gsap.to(bean, {
-        bottom: 32,
-        right: 32,
-        x: 0,
-        y: 0,
-        scale: 1,
-        duration: 0.6,
-        ease: 'power3.in',
-      });
-    }
   }, [idle]);
 
   const mins = Math.floor(elapsed / 60);
@@ -67,19 +61,20 @@ export const BeanBot: React.FC<BeanBotProps> = ({ onOpenDirections }) => {
           50% { transform: scale(1.03); }
         }
         @keyframes brew-fade {
-          0%, 100% { opacity: 0.25; letter-spacing: 0.4em; }
-          50% { opacity: 0.55; letter-spacing: 0.55em; }
+          0%, 100% { opacity: 0.2; letter-spacing: 0.4em; }
+          50% { opacity: 0.5; letter-spacing: 0.55em; }
         }
       `}</style>
 
       {idle && (
-        <div className="fixed inset-0 z-[9997] bg-black/20 pointer-events-none transition-opacity duration-1000" />
+        <div className="fixed inset-0 z-[9997] bg-black/20 pointer-events-none animate-fade-rise" />
       )}
 
       {idle && (
-        <div className="fixed inset-0 z-[9998] flex flex-col items-center justify-center pointer-events-none">
+        <div className="fixed inset-0 z-[9998] flex flex-col items-center justify-center pointer-events-none animate-fade-rise" style={{ animationDuration: '1.5s' }}>
+          <BeanSVG w={44} h={52} />
           <p
-            className="text-accent/40 text-sm font-mono uppercase"
+            className="text-accent/40 text-sm font-mono uppercase mt-5"
             style={{ animation: 'brew-fade 4s ease-in-out infinite' }}
           >
             Still brewing
@@ -94,44 +89,17 @@ export const BeanBot: React.FC<BeanBotProps> = ({ onOpenDirections }) => {
         </div>
       )}
 
-      <button
-        ref={beanRef}
-        onClick={() => { tap(); setOpen(!open); }}
-        className={`fixed z-40 cursor-pointer group ${idle ? 'pointer-events-none' : ''}`}
-        style={{ bottom: 32, right: 32 }}
-        aria-label="Chat with Pula"
-      >
-        <svg
-          viewBox="0 0 24 24"
-          width="28"
-          height="34"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-          className="transition-transform duration-300"
-          style={{
-            filter: 'drop-shadow(0 4px 12px rgba(0,0,0,0.4))',
-            animation: idle ? 'none' : 'pula-pulse 3s ease-in-out infinite',
-          }}
+      {!idle && (
+        <button
+          onClick={() => { tap(); setOpen(!open); }}
+          className="fixed bottom-8 right-8 z-40 cursor-pointer group"
+          aria-label="Chat with Pula"
         >
-          <ellipse cx="12" cy="12" rx="10" ry="13" fill="rgba(180,100,40,0.7)" />
-          <ellipse cx="12" cy="12" rx="8.5" ry="11" fill="url(#pulaGrad)" />
-          <defs>
-            <radialGradient id="pulaGrad" cx="0.35" cy="0.3" r="0.8">
-              <stop offset="0%" stopColor="rgba(230,150,60,0.4)" />
-              <stop offset="100%" stopColor="rgba(100,50,20,0.35)" />
-            </radialGradient>
-          </defs>
-          <path
-            d="M9 5.5 Q12 12 9 18.5"
-            stroke="rgba(60,25,5,0.5)"
-            strokeWidth="0.8"
-            strokeLinecap="round"
-            fill="none"
-          />
-        </svg>
-      </button>
+          <BeanSVG w={28} h={34} />
+        </button>
+      )}
 
-      {open && (
+      {!idle && open && (
         <div className="fixed bottom-24 right-6 z-50 liquid-glass rounded-2xl p-5 w-64 animate-fade-rise shadow-xl">
           <div className="flex items-center justify-between mb-4">
             <h3 className="text-base text-white font-normal" style={{ fontFamily: "'Instrument Serif', serif" }}>Pula</h3>
