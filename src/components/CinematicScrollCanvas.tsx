@@ -20,6 +20,15 @@ export const CinematicScrollCanvas: React.FC = () => {
   const [progress, setProgress] = useState(0);
   const [phase, setPhase] = useState<'probing' | 'loading'>('probing');
 
+  useEffect(() => {
+    document.body.classList.add('loading');
+    return () => document.body.classList.remove('loading');
+  }, []);
+
+  useEffect(() => {
+    if (ready) document.body.classList.remove('loading');
+  }, [ready]);
+
   const drawFrame = (index: number) => {
     const canvas = canvasRef.current;
     if (!canvas) return;

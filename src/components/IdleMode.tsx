@@ -7,6 +7,7 @@ export const IdleMode: React.FC = () => {
 
   useEffect(() => {
     const reset = () => {
+      if (document.body.classList.contains('loading')) return;
       if (document.body.classList.contains('menu-open')) return;
       document.body.classList.remove('idle');
       if (timerRef.current) clearTimeout(timerRef.current);

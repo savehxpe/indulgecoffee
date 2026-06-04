@@ -15,12 +15,13 @@ const BeanSVG: React.FC<{ w: number; h: number; paused?: boolean }> = ({ w, h, p
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
     style={{
-      filter: 'drop-shadow(0 4px 12px rgba(0,0,0,0.4))',
+      filter: 'drop-shadow(0 4px 12px rgba(0,0,0,0.4)) drop-shadow(0 0 8px rgba(217,119,6,0.15))',
       animation: paused ? 'none' : 'pula-pulse 3s ease-in-out infinite',
     }}
   >
     <ellipse cx="12" cy="12" rx="10" ry="13" fill="rgba(180,100,40,0.7)" />
     <ellipse cx="12" cy="12" rx="8.5" ry="11" fill="url(#pulaGrad)" />
+    <ellipse cx="8" cy="7" rx="4" ry="5" fill="rgba(255,255,255,0.08)" />
     <defs>
       <radialGradient id="pulaGrad" cx="0.35" cy="0.3" r="0.8">
         <stop offset="0%" stopColor="rgba(230,150,60,0.4)" />
@@ -69,22 +70,24 @@ export const BeanBot: React.FC<BeanBotProps> = ({ onOpenDirections }) => {
 
       {idle && (<>
         <div className="fixed inset-0 z-[9997] bg-black/50 pointer-events-none transition-opacity duration-1000" />
-        <GlowOrb className="inset-0 w-[250px] h-[250px] m-auto" />
+        <GlowOrb className="inset-0 w-[400px] h-[400px] m-auto" />
         <div className="fixed inset-0 z-[9998] flex flex-col items-center justify-center pointer-events-none animate-fade-rise" style={{ animationDuration: '1.5s' }}>
-          <BeanSVG w={44} h={52} />
+          <BeanSVG w={56} h={64} />
+          <div className="mt-5 px-6 py-4 rounded-2xl border border-accent/10" style={{ background: 'rgba(217,119,6,0.03)' }}>
           <p
-            className="text-accent/70 text-sm font-mono uppercase mt-5"
+            className="text-accent/85 text-lg font-mono uppercase"
             style={{ animation: 'brew-fade 4s ease-in-out infinite' }}
           >
             Still brewing
           </p>
-          <p className="text-accent/50 text-[10px] font-mono tracking-[0.3em] mt-2">{timeStr}</p>
+          <p className="text-accent/65 text-sm font-mono tracking-[0.3em] mt-2">{timeStr}</p>
           <p
-            className="text-muted-foreground/50 text-[11px] mt-5"
+            className="text-muted-foreground/65 text-xs mt-4"
             style={{ fontFamily: "'Instrument Serif', serif" }}
           >
             Take your time.
           </p>
+          </div>
         </div>
       </>)}
 
