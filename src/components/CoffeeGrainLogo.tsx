@@ -10,105 +10,107 @@ export const CoffeeGrainLogo: React.FC<CoffeeGrainLogoProps> = ({ className }) =
     className={className}
   >
     <defs>
-      <radialGradient id="grain-body" cx="38%" cy="30%" r="68%" fx="30%" fy="24%">
+      <radialGradient id="grain-body-g" cx="35%" cy="45%" r="65%">
         <stop offset="0%" stopColor="#8B5A3C" />
         <stop offset="30%" stopColor="#5C3A21" />
-        <stop offset="65%" stopColor="#2E1503" />
+        <stop offset="60%" stopColor="#2E1503" />
         <stop offset="100%" stopColor="#140601" />
       </radialGradient>
 
-      <radialGradient id="grain-rim" cx="50%" cy="50%" r="50%">
-        <stop offset="72%" stopColor="transparent" />
-        <stop offset="90%" stopColor="#d97706" stopOpacity="0.2" />
-        <stop offset="100%" stopColor="#d97706" stopOpacity="0.5" />
-      </radialGradient>
-
-      <linearGradient id="grain-crease" x1="0.15" y1="0.25" x2="0.85" y2="0.8">
-        <stop offset="0%" stopColor="#d97706" stopOpacity="0.1" />
-        <stop offset="35%" stopColor="#d97706" stopOpacity="0.4" />
-        <stop offset="65%" stopColor="#1a0a02" stopOpacity="0.6" />
-        <stop offset="100%" stopColor="#140601" stopOpacity="0.9" />
+      <linearGradient id="grain-shadow-r" x1="0" y1="0" x2="1" y2="0">
+        <stop offset="0%" stopColor="transparent" />
+        <stop offset="50%" stopColor="transparent" />
+        <stop offset="70%" stopColor="#0a0400" stopOpacity="0.25" />
+        <stop offset="100%" stopColor="#0a0400" stopOpacity="0.55" />
       </linearGradient>
 
-      <linearGradient id="grain-highlight" x1="0" y1="0" x2="0.4" y2="1">
-        <stop offset="0%" stopColor="white" stopOpacity="0.5" />
-        <stop offset="25%" stopColor="white" stopOpacity="0.12" />
-        <stop offset="55%" stopColor="white" stopOpacity="0.02" />
+      <radialGradient id="grain-rim-g" cx="50%" cy="50%" r="50%">
+        <stop offset="78%" stopColor="transparent" />
+        <stop offset="94%" stopColor="#d97706" stopOpacity="0.2" />
+        <stop offset="100%" stopColor="#d97706" stopOpacity="0.38" />
+      </radialGradient>
+
+      <linearGradient id="grain-gloss-g" x1="0" y1="0" x2="0.35" y2="1">
+        <stop offset="0%" stopColor="white" stopOpacity="0.45" />
+        <stop offset="40%" stopColor="white" stopOpacity="0.08" />
         <stop offset="100%" stopColor="white" stopOpacity="0" />
       </linearGradient>
 
-      <filter id="grain-shadow" x="-25%" y="-15%" width="150%" height="140%">
-        <feDropShadow dx="0" dy="1.5" stdDeviation="2" floodColor="#000" floodOpacity="0.45" />
+      <filter id="grain-shadow-f" x="-25%" y="-12%" width="150%" height="134%">
+        <feDropShadow dx="0" dy="2" stdDeviation="2.5" floodColor="#000" floodOpacity="0.4" />
       </filter>
     </defs>
 
     <g transform="translate(24,24) rotate(-12) translate(-24,-24)">
-      <path
-        d="M24 6
-           C13.5 7 7 13 6.5 20
-           C6 27 7.5 33 14 38
-           C20 42.5 28 42.5 34 38
-           C40.5 33 42 27 41.5 20
-           C41 13 34.5 7 24 6Z"
-        fill="url(#grain-body)"
-        filter="url(#grain-shadow)"
+      <ellipse
+        cx="24"
+        cy="24.5"
+        rx="10"
+        ry="17"
+        fill="url(#grain-body-g)"
+        filter="url(#grain-shadow-f)"
+      />
+
+      <ellipse
+        cx="24"
+        cy="24.5"
+        rx="10"
+        ry="17"
+        fill="url(#grain-shadow-r)"
+      />
+
+      <ellipse
+        cx="24"
+        cy="24.5"
+        rx="10"
+        ry="17"
+        fill="url(#grain-rim-g)"
       />
 
       <path
-        d="M24 6
-           C13.5 7 7 13 6.5 20
-           C6 27 7.5 33 14 38
-           C20 42.5 28 42.5 34 38
-           C40.5 33 42 27 41.5 20
-           C41 13 34.5 7 24 6Z"
-        fill="url(#grain-rim)"
-      />
-
-      <path
-        d="M10 13 C14 17 18 22 19 30 C20 24 22 17 26 13"
-        stroke="url(#grain-crease)"
+        d="M22.5 8.5 C28 15 32 21 28 28 C24 33 18.5 37 18.5 40.5"
+        stroke="#0a0300"
         strokeWidth="1.8"
         strokeLinecap="round"
         fill="none"
       />
 
       <path
-        d="M10 14 C14 18 18 23 19 31 C20 25 22 18 26 14"
-        stroke="#0a0400"
+        d="M23 9 C28.5 15.5 31.5 21 27.5 27.5 C24 32.5 19 36.5 19 39.5"
+        stroke="#d97706"
         strokeWidth="0.6"
         strokeLinecap="round"
         fill="none"
-        opacity="0.4"
-      />
-
-      <path
-        d="M24 6
-           C13.5 7 7 13 6.5 20
-           C6 27 7.5 33 14 38
-           C20 42.5 28 42.5 34 38
-           C40.5 33 42 27 41.5 20
-           C41 13 34.5 7 24 6Z"
-        fill="url(#grain-highlight)"
+        opacity="0.45"
       />
 
       <ellipse
-        cx="18"
-        cy="16"
-        rx="4.5"
-        ry="2"
+        cx="18.5"
+        cy="12"
+        rx="5.5"
+        ry="2.8"
+        fill="url(#grain-gloss-g)"
+        transform="rotate(-14 18.5 12)"
+      />
+
+      <ellipse
+        cx="17.5"
+        cy="10.5"
+        rx="2.5"
+        ry="1.2"
         fill="white"
         opacity="0.35"
-        transform="rotate(-20 18 16)"
+        transform="rotate(-11 17.5 10.5)"
       />
 
       <ellipse
         cx="17"
-        cy="14"
-        rx="2.2"
-        ry="1"
+        cy="9.5"
+        rx="1.3"
+        ry="0.6"
         fill="white"
-        opacity="0.5"
-        transform="rotate(-18 17 14)"
+        opacity="0.55"
+        transform="rotate(-9 17 9.5)"
       />
     </g>
   </svg>

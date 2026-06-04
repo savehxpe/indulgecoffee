@@ -76,21 +76,32 @@ export const CustomCursor: React.FC = () => {
         }}
       >
         <svg viewBox="0 0 24 24" width="20" height="24" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <ellipse cx="11" cy="12" rx="9" ry="12" fill="rgba(180,100,40,0.9)" />
-          <ellipse cx="11" cy="12" rx="7.5" ry="10" fill="url(#beanGrad)" />
           <defs>
-            <radialGradient id="beanGrad" cx="0.3" cy="0.3" r="0.8">
-              <stop offset="0%" stopColor="rgba(230,150,60,0.4)" />
-              <stop offset="100%" stopColor="rgba(100,50,20,0.3)" />
+            <radialGradient id="bean-body" cx="35%" cy="45%" r="65%">
+              <stop offset="0%" stopColor="#8B5A3C" />
+              <stop offset="35%" stopColor="#4A2C17" />
+              <stop offset="70%" stopColor="#2E1503" />
+              <stop offset="100%" stopColor="#140601" />
             </radialGradient>
+            <linearGradient id="bean-shadow" x1="0" y1="0" x2="1" y2="0">
+              <stop offset="0%" stopColor="transparent" />
+              <stop offset="55%" stopColor="transparent" />
+              <stop offset="80%" stopColor="rgba(10,4,0,0.4)" />
+              <stop offset="100%" stopColor="rgba(10,4,0,0.65)" />
+            </linearGradient>
+            <linearGradient id="bean-gloss" x1="0" y1="0" x2="0.3" y2="1">
+              <stop offset="0%" stopColor="white" stopOpacity="0.4" />
+              <stop offset="100%" stopColor="white" stopOpacity="0" />
+            </linearGradient>
           </defs>
-          <path
-            d="M8 5 Q11 12 8 19"
-            stroke="rgba(60,25,5,0.6)"
-            strokeWidth="0.8"
-            strokeLinecap="round"
-            fill="none"
-          />
+          <g transform="translate(12,12.5) rotate(-15) translate(-12,-12.5)">
+            <ellipse cx="12" cy="12.5" rx="5.2" ry="8.8" fill="url(#bean-body)" />
+            <ellipse cx="12" cy="12.5" rx="5.2" ry="8.8" fill="url(#bean-shadow)" />
+            <path d="M11 4.5 C13.8 7.5 15.2 10.5 13.5 14 C12 17 9.5 19.5 9.5 20.5" stroke="rgba(10,3,0,0.5)" strokeWidth="0.9" strokeLinecap="round" fill="none" />
+            <path d="M11.3 4.7 C14 7.7 15.2 10.5 13.5 13.8 C12.2 16.5 9.8 19 9.8 20" stroke="rgba(217,119,6,0.45)" strokeWidth="0.3" strokeLinecap="round" fill="none" />
+            <ellipse cx="9.5" cy="6" rx="2.8" ry="1.4" fill="url(#bean-gloss)" transform="rotate(-14 9.5 6)" />
+            <ellipse cx="9" cy="5.2" rx="1.2" ry="0.6" fill="white" opacity="0.4" transform="rotate(-10 9 5.2)" />
+          </g>
         </svg>
       </div>
     </div>
