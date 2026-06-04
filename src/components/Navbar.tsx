@@ -1,5 +1,5 @@
 import React from 'react';
-import { Coffee } from 'lucide-react';
+import { CoffeeGrainLogo } from './CoffeeGrainLogo';
 import { tap } from '../utils/haptic';
 import { DotMenu } from './DotMenu';
 
@@ -21,8 +21,8 @@ export const Navbar: React.FC<NavbarProps> = ({ onScrollToForm, onOpenDirections
     <nav className="fixed top-0 left-0 right-0 z-40 bg-black/60 backdrop-blur-md pt-[env(safe-area-inset-top)]">
       <div className="max-w-7xl mx-auto flex row justify-between items-center px-6 md:px-8 py-4">
         <a href="#home" className="flex items-center gap-3.5 group">
-          <div className="w-10 h-10 rounded-full bg-white/[0.03] flex items-center justify-center group-hover:bg-accent/10 transition-all duration-300">
-            <Coffee className="w-5 h-5 text-accent group-hover:scale-110 transition-transform duration-300" />
+          <div className="w-10 h-10 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+            <CoffeeGrainLogo className="w-9 h-9 drop-shadow-[0_0_6px_rgba(217,119,6,0.3)] group-hover:drop-shadow-[0_0_10px_rgba(217,119,6,0.5)] transition-all duration-300" />
           </div>
           <div className="flex flex-col">
             <span

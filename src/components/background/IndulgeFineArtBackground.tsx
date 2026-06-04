@@ -240,11 +240,12 @@ const Granules: React.FC = () => {
 // ── Main Scene ──
 export const IndulgeFineArtBackground: React.FC = () => {
   return (
-    <div className="fixed inset-0 -z-20 pointer-events-none" aria-hidden="true">
+    <div className="fixed inset-0 -z-20 pointer-events-none" aria-hidden="true" style={{ width: '100vw', height: '100vh' }}>
       <Canvas
         camera={{ position: [0, 0.1, 4.5], fov: 35 }}
-        gl={{ antialias: true, alpha: false }}
+        gl={{ antialias: true, alpha: true, premultipliedAlpha: false }}
         dpr={[1, 1.5]}
+        resize={{ scroll: false, debounce: { scroll: 50, resize: 0 } }}
       >
         <color attach="background" args={['#000000']} />
         <fog attach="fog" args={['#000000', 3.5, 14]} />

@@ -93,7 +93,7 @@ export default function App() {
   }
 
   return (
-    <div className="min-h-screen text-white selection:bg-accent/40 font-sans relative antialiased overflow-x-hidden">
+    <div className="min-h-screen text-white selection:bg-accent/40 font-sans antialiased overflow-x-hidden">
       <CustomCursor />
       {/* Structuring for SEO meta indices */}
       <SeoJsonLd />
