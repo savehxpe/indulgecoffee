@@ -1,0 +1,6 @@
+{
+  "name": "Indulge Coffee Lesotho",
+  "description": "A premium coffee lounge and coffee experience brand in Lesotho – where warmth meets altitude.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

@@ -1,0 +1,177 @@
+@import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-display: "Instrument Serif", serif;
+  --font-sans: "Inter", sans-serif;
+  
+  --color-background: hsl(0 0% 0%);
+  --color-foreground: hsl(0 0% 100%);
+  --color-muted-foreground: hsl(240 4% 66%);
+  --color-primary: hsl(0 0% 100%);
+  --color-primary-foreground: hsl(0 0% 4%);
+  --color-secondary: hsl(0 0% 10%);
+  --color-muted: hsl(0 0% 10%);
+  --color-accent: hsl(28 60% 45%);
+  --color-border: hsl(0 0% 18%);
+  --color-input: hsl(0 0% 18%);
+  
+  --color-espresso: #2e1503;
+  --color-bean: #4a2c11;
+  --color-cream: #fbf6f0;
+  --color-amber-accent: #d97706;
+}
+
+@layer base {
+  :root {
+    --background: 0 0% 0%;
+    --foreground: 0 0% 100%;
+    --muted-foreground: 240 4% 66%;
+    --primary: 0 0% 100%;
+    --primary-foreground: 0 0% 4%;
+    --secondary: 0 0% 10%;
+    --muted: 0 0% 10%;
+    --accent: 28 60% 45%; /* Warm amber accent */
+    --border: 0 0% 18%;
+    --input: 0 0% 18%;
+    
+    --font-display: 'Instrument Serif', serif;
+    --font-body: 'Inter', sans-serif;
+  }
+
+  body {
+    background-color: hsl(var(--background));
+    color: hsl(var(--foreground));
+    font-family: var(--font-body);
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+    overscroll-behavior: none;
+  }
+
+  @media (min-width: 1024px) {
+    body { cursor: none; }
+  }
+
+  @media (pointer: coarse) {
+    body { cursor: auto; }
+  }
+}
+
+@utility liquid-glass {
+  background: rgba(255, 255, 255, 0.03);
+  background-blend-mode: luminosity;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  position: relative;
+  overflow: hidden;
+}
+
+@utility liquid-glass-accent {
+  background: rgba(217, 119, 6, 0.05);
+  background-blend-mode: luminosity;
+  border: 1px solid rgba(217, 119, 6, 0.1);
+  position: relative;
+  overflow: hidden;
+}
+
+@utility accent-glow {
+  color: #df7311;
+  text-shadow: 0 0 15px rgba(242, 125, 38, 0.25);
+}
+
+/* Before borders for liquid-glass effect */
+.liquid-glass::before, .liquid-glass-accent::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1.5px;
+  background: linear-gradient(180deg, 
+    rgba(255,255,255,0.4) 0%, 
+    rgba(255,255,255,0.1) 20%, 
+    transparent 40%, 
+    transparent 60%, 
+    rgba(255,255,255,0.1) 80%, 
+    rgba(255,255,255,0.4) 100%);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+.liquid-glass-accent::before {
+  background: linear-gradient(180deg, 
+    rgba(217,119,6,0.6) 0%, 
+    rgba(217,119,6,0.2) 20%, 
+    transparent 40%, 
+    transparent 60%, 
+    rgba(217,119,6,0.2) 80%, 
+    rgba(217,119,6,0.6) 100%);
+}
+
+@utility animate-fade-rise {
+  animation: fade-rise 1.2s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@utility animate-fade-rise-delay {
+  animation: fade-rise 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.2s both;
+}
+
+@utility animate-fade-rise-delay-2 {
+  animation: fade-rise 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.4s both;
+}
+
+@keyframes fade-rise {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes cta-shake {
+  0%, 75%, 100% { transform: translateX(0); }
+  78% { transform: translateX(-2px); }
+  81% { transform: translateX(2px); }
+  84% { transform: translateX(-1px); }
+}
+
+.preserve-3d { transform-style: preserve-3d; }
+
+/* Custom scrollbar to keep layout premium */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #000;
+}
+::-webkit-scrollbar-thumb {
+  background: #1f1f1f;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #2f2f2f;
+}
+
+/* Cozy mode overlay */
+body.cozy::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 10;
+  pointer-events: none;
+  background: linear-gradient(180deg, rgba(180,80,20,0.12) 0%, rgba(80,40,15,0.08) 50%, rgba(20,10,5,0.15) 100%);
+  mix-blend-mode: overlay;
+}
+
+body.cozy section,
+body.cozy header,
+body.cozy footer {
+  filter: brightness(0.9) sepia(0.15);
+}
+
+body.cozy .text-white {
+  color: #f5e6d3 !important;
+}
+
+/* Idle / Cinema Rest Mode */
+body.idle section {
+  transition: opacity 2s ease;
+  opacity: 0.15;
+}
