@@ -25,23 +25,6 @@ gsap.registerPlugin(ScrollToPlugin);
 
 
 export default function App() {
-  if (window.location.pathname === '/secret' || window.location.pathname === '/qr') {
-    return (
-      <div className="min-h-screen bg-black text-white">
-        <SecretMenu onAddSubmission={(lead) => {
-          const newSubmission: LeadSubmission = {
-            ...lead,
-            id: `lead_${Date.now()}_${Math.random().toString(36).substr(2, 4)}`,
-            createdAt: new Date().toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false }) + ' UTC'
-          };
-          const stored = localStorage.getItem('indulge_leads_telemetry');
-          const existing = stored ? JSON.parse(stored) : [];
-          localStorage.setItem('indulge_leads_telemetry', JSON.stringify([newSubmission, ...existing]));
-        }} />
-      </div>
-    );
-  }
-
   // Store submissions in local state, initialized from localStorage
   const [submissions, setSubmissions] = useState<LeadSubmission[]>([]);
   const [isEnquiryOpen, setIsEnquiryOpen] = useState(false);
@@ -98,6 +81,16 @@ export default function App() {
 
   const handleScrollToForm = () => handleScrollToSection('enquiry');
 
+
+  const isSecretRoute = window.location.pathname === '/secret' || window.location.pathname === '/qr';
+
+  if (isSecretRoute) {
+    return (
+      <div className="min-h-screen bg-black text-white">
+        <SecretMenu onAddSubmission={handleAddSubmission} />
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen text-white selection:bg-accent/40 font-sans relative antialiased overflow-x-hidden">
