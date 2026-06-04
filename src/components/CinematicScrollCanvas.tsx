@@ -282,7 +282,7 @@ export const CinematicScrollCanvas: React.FC = () => {
           className="absolute inset-0 w-full h-full pointer-events-none"
           style={{ willChange: 'transform' }}
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-transparent to-black/80 pointer-events-none" />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/25 via-transparent to-black/50 pointer-events-none" />
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
       </div>
     </>
