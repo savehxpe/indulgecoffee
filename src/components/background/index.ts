@@ -1,0 +1,1 @@
+export { IndulgeFineArtBackground } from './IndulgeFineArtBackground';

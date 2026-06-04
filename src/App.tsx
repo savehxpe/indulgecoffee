@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { SeoJsonLd } from './components/SeoJsonLd';
-import { Coffee3DScene } from './components/Coffee3DScene';
+import { IndulgeFineArtBackground } from './components/background';
 import { Navbar } from './components/Navbar';
 import { Hero } from './components/Hero';
 import { ActionCards } from './components/ActionCards';
@@ -99,7 +99,7 @@ export default function App() {
       <SeoJsonLd />
       
       {/* Background container ready for cinematic assets */}
-      <Coffee3DScene />
+      <IndulgeFineArtBackground />
 
       {/* Embedded Fixed Header Nav */}
       <header>
