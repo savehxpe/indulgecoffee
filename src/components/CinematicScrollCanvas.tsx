@@ -6,7 +6,8 @@ gsap.registerPlugin(ScrollTrigger);
 
 const FRAME_BASE = '/frames/ezgif-frame';
 const ZOOM_FACTOR = 1.35;
-const MAX_PROBE = 400;
+const MAX_PROBE = 210;
+const MIN_READY = 40;
 
 export const CinematicScrollCanvas: React.FC = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -104,6 +105,8 @@ export const CinematicScrollCanvas: React.FC = () => {
       loadedCount = done;
 
       if (done === detected) {
+        complete(detected);
+      } else if (done >= MIN_READY) {
         complete(detected);
       } else {
         setPhase('loading');

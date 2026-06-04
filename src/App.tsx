@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { SeoJsonLd } from './components/SeoJsonLd';
 import { CinematicScrollCanvas } from './components/CinematicScrollCanvas';
+import { SteamParticles } from './components/SteamParticles';
 import { Navbar } from './components/Navbar';
 import { Hero } from './components/Hero';
 import { ActionCards } from './components/ActionCards';
@@ -100,6 +101,7 @@ export default function App() {
       
       {/* Background container ready for cinematic assets */}
       <CinematicScrollCanvas />
+      <SteamParticles />
 
       {/* Embedded Fixed Header Nav */}
       <header>
